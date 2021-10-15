@@ -1,0 +1,44 @@
+CNC Remote App/[Ll]ibrary/
+CNC Remote App/[Tt]emp/
+CNC Remote App/[Oo]bj/
+CNC Remote App/[Bb]uild/
+CNC Remote App/[Bb]uilds/
+CNC Remote App/[Ll]ogs/
+CNC Remote App/[Mm]emoryCaptures/
+
+!CNC Remote App/[Aa]ssets/**/*.meta
+
+CNC Remote App/[Aa]ssets/Plugins/Editor/JetBrains*
+
+.vs/
+
+.gradle/
+
+ExportedObj/
+.consulo/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+sysinfo.txt
+
+# Builds
+*.apk
+*.unitypackage
+
+crashlytics-build.properties
