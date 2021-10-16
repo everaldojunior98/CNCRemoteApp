@@ -1,19 +1,28 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 public class DrawManager : MonoBehaviour
 {
-    public GameObject DrawingPrefab;
-    public bool Optimize;
+    [SerializeField]
+    private GameObject drawingPrefab;
 
     private LineRenderer lineRenderer;
     private Vector3 lastMousePosition;
     private bool needOptimize;
 
+    private List<Vector3[]> drawings;
+
+    private void Start()
+    {
+        drawings = new List<Vector3[]>();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            var drawing = Instantiate(DrawingPrefab);
+            var drawing = Instantiate(drawingPrefab);
             lineRenderer = drawing.GetComponent<LineRenderer>();
             lineRenderer.startWidth = 0.1f;
             lineRenderer.endWidth = 0.1f;
@@ -22,7 +31,7 @@ public class DrawManager : MonoBehaviour
         if (Input.GetMouseButton(0))
             FreeDraw();
 
-        if (Optimize && needOptimize && Input.GetMouseButtonUp(0))
+        if (needOptimize && Input.GetMouseButtonUp(0))
             OptimizeLine();
     }
 
@@ -43,6 +52,15 @@ public class DrawManager : MonoBehaviour
     private void OptimizeLine()
     {
         needOptimize = false;
-        lineRenderer.Simplify(0.005f);
+        lineRenderer.Simplify(0.001f);
+
+        var points = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(points);
+        drawings.Add(points);
+    }
+
+    public List<Vector3[]> GetDrawings()
+    {
+        return drawings.ToList();
     }
 }
