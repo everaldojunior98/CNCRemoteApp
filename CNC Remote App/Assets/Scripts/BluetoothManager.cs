@@ -69,8 +69,9 @@ public class BluetoothManager : MonoBehaviour
     {
         if (bluetoothHelper != null && bluetoothHelper.isConnected())
         {
-            bluetoothHelper.SendData("G21 G90 G0 Z0.0");
+            bluetoothHelper.SendData("G21 G90 G0 Z5");
             bluetoothHelper.SendData("G90 G28 X0 Y0");
+            bluetoothHelper.SendData("G90 G28 Z0");
         }
     }
 
@@ -153,7 +154,7 @@ public class BluetoothManager : MonoBehaviour
 
     private void Draw()
     {
-        //if (bluetoothHelper != null && bluetoothHelper.isConnected())
+        if (bluetoothHelper != null && bluetoothHelper.isConnected())
             StartCoroutine(SendGCode());
     }
 
@@ -162,8 +163,8 @@ public class BluetoothManager : MonoBehaviour
         var gCode = GCodeManager.GenerateGCode();
         foreach (var code in gCode)
         {
-            //bluetoothHelper.SendData(code);
-            yield return new WaitForSeconds(0.3f);
+            bluetoothHelper.SendData(code);
+            yield return new WaitForSeconds(1f);
         }
     }
 

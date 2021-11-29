@@ -22,8 +22,6 @@ public class GCodeManager : MonoBehaviour
     private DrawManager drawManager;
     private Camera mainCamera;
 
-    public TMP_Text a;
-
     private void Start()
     {
         drawManager = FindObjectOfType<DrawManager>();
@@ -75,7 +73,6 @@ public class GCodeManager : MonoBehaviour
         var gcode = new List<string> {"G21", "G90", "G94", "F150.00", "M03 S100", "G4 P1", "G0x0y0z0", "G0z5" };
         foreach (var drawing in convertedDrawings.Where(d => d.Count > 0))
         {
-            a.text += $"NOVO DESENHO: {drawing.Count}\n";
             var first = drawing.First();
             gcode.Add($"G0x{ConvertFloat(first.x)}y{ConvertFloat(first.y)}");
             gcode.Add("G0z0");
